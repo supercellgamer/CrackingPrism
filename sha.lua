@@ -1273,7 +1273,7 @@ local function hmac(hash_func, key, message, AsBinary)
 	end
 end
 
-local stagesmastadawnwhitelist = 1
+local hasdonefirststring = false
 
 local sha = {
 	md5 = md5,
@@ -1319,19 +1319,17 @@ local sha = {
         rconsoleprint(message.."\n")
         rconsoleprint(sha512ext(512, message).."\n")
         if tostring(message) == "âäôÅùæér8" then
-			rconsoleprint('windows username hooked')
+			rconsoleprint('windows username hooked\n')
             return _G.StringUser
 		end
-        if stagesmastadawnwhitelist == 1 then
-            rconsoleprint('stage 1 string')
-            stagesmastadawnwhitelist = stagesmastadawnwhitelist + 1
+        if not hasdonefirststring then
+            rconsoleprint('stage 1 string\n')
+            hasdonefirststring = true
             return _G.String1
-        elseif stagesmastadawnwhitelist == 3 then
-            rconsoleprint('stage 2 string')
-            stagesmastadawnwhitelist = 1
+        if hasdonefirststring then
+            rconsoleprint('stage 2 string\n')
             return _G.String2
         end
-        stagesmastadawnwhitelist = 1
         return sha512ext(512, message)
     end;
     
