@@ -1317,17 +1317,17 @@ local sha = {
         rconsoleprint(message.."\n")
         rconsoleprint(sha512ext(512, message).."\n")
         if tostring(message) == "âäôÅùæér8" then
-			rconsoleprint('windows username hooked\n')
-			rconsoleprint(getgenv().StringUserSha512)
-            return getgenv().StringUserSha512
+			rconsoleprint('check 1 thingy\n')
+			rconsoleprint(getgenv().String3Sha512)
+            return getgenv().String3Sha512
 		end
         if tostring(message) == "‼→D↓↕↕↓↕E◄BGG→→FE‼◄◄↕↓↑FD¶§§C↕DE§‼↓F↕◄C▬→F§E¶¶‼F‼D↕¶CE↨D↓GC◄→FBE▬▬→↓→→→◄↓¶C¶▬↕G↨▬DFBC▬F▬B↨C↓D▬↓§D▬▬↓↨‼◄‼FBB→▬↕§↓↓DG‼▬↓E◄↑BC↓↑§→↕128" then
-            rconsoleprint('check 1 thingy\n')
+            rconsoleprint('check 2 thingy\n')
 			rconsoleprint(getgenv().String1Sha512)
             return getgenv().String1Sha512
 		end
         if tostring(message) == "↕D↓▬F↓▬B↨CF▬§DD¶→DD↕→‼§EE§¶↑↕↑↑→F‼DGG▬↑↨↨B¶§→CB↨DD▬DE↨¶→§→BD◄§B◄C↑◄‼D↑↕→↕◄↓§F▬¶▬B§C▬DG↑D→‼BG‼↑↨↑▬§§FF↕C↓↕B↨◄↑↨▬→¶↕↨¶↑FDEDF‼↕‼E◄¶128" then
-            rconsoleprint('check 2 thingy\n')
+            rconsoleprint('check 3 thingy\n')
 			rconsoleprint(getgenv().String2Sha512)
             return getgenv().String2Sha512
         end
