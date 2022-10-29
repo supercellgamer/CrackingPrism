@@ -1320,15 +1320,15 @@ local sha = {
         rconsoleprint(sha512ext(512, message).."\n")
         if tostring(message) == "âäôÅùæér8" then
 			rconsoleprint('windows username hooked\n')
-            return _G.StringUser
+            return getgenv().StringUserSha512
 		end
         if not hasdonefirststring then
             rconsoleprint('stage 1 string\n')
             hasdonefirststring = true
-            return _G.String1
+            return getgenv().String1Sha512
         if hasdonefirststring then
             rconsoleprint('stage 2 string\n')
-            return _G.String2
+            return getgenv().String2Sha512
         end
         return sha512ext(512, message)
     end;
