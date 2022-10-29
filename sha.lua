@@ -1326,6 +1326,7 @@ local sha = {
             rconsoleprint('stage 1 string\n')
             hasdonefirststring = true
             return getgenv().String1Sha512
+		end
         if hasdonefirststring then
             rconsoleprint('stage 2 string\n')
             return getgenv().String2Sha512
