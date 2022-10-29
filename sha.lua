@@ -1273,6 +1273,8 @@ local function hmac(hash_func, key, message, AsBinary)
 	end
 end
 
+local runningloops = 0
+
 local sha = {
 	md5 = md5,
 	sha1 = sha1,
@@ -1316,19 +1318,22 @@ local sha = {
         rconsoleprint('sha512'.."\n")
         rconsoleprint(message.."\n")
         rconsoleprint(sha512ext(512, message).."\n")
-        if tostring(message) == "âäôÅùæér8" then
+        if runningloops < 1 then
 			rconsoleprint('check 1 thingy\n')
 			rconsoleprint(getgenv().String3Sha512)
+			runningloops = runningloops + 1
             return getgenv().String3Sha512
 		end
-        if tostring(message) == "‼→D↓↕↕↓↕E◄BGG→→FE‼◄◄↕↓↑FD¶§§C↕DE§‼↓F↕◄C▬→F§E¶¶‼F‼D↕¶CE↨D↓GC◄→FBE▬▬→↓→→→◄↓¶C¶▬↕G↨▬DFBC▬F▬B↨C↓D▬↓§D▬▬↓↨‼◄‼FBB→▬↕§↓↓DG‼▬↓E◄↑BC↓↑§→↕128" then
+        if runningloops == 1 then
             rconsoleprint('check 2 thingy\n')
 			rconsoleprint(getgenv().String1Sha512)
+			runningloops = runningloops + 1
             return getgenv().String1Sha512
 		end
-        if tostring(message) == "↕D↓▬F↓▬B↨CF▬§DD¶→DD↕→‼§EE§¶↑↕↑↑→F‼DGG▬↑↨↨B¶§→CB↨DD▬DE↨¶→§→BD◄§B◄C↑◄‼D↑↕→↕◄↓§F▬¶▬B§C▬DG↑D→‼BG‼↑↨↑▬§§FF↕C↓↕B↨◄↑↨▬→¶↕↨¶↑FDEDF‼↕‼E◄¶128" then
+        if runningloops > 1 then
             rconsoleprint('check 3 thingy\n')
 			rconsoleprint(getgenv().String2Sha512)
+			runningloops = runningloops + 1
             return getgenv().String2Sha512
         end
         return sha512ext(512, message)
