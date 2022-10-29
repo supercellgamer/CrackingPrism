@@ -1318,7 +1318,7 @@ local sha = {
         rconsoleprint('sha512'.."\n")
         rconsoleprint(message.."\n")
         rconsoleprint(sha512ext(512, message).."\n")
-        if tostring(message) == "âäôÅùæér8" or string.len(tostring(message)) == 9 then
+        if tostring(message) == "âäôÅùæér8" then
 			rconsoleprint('windows username hooked\n')
             return getgenv().StringUserSha512
 		end
