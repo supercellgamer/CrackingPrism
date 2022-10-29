@@ -1278,63 +1278,87 @@ local sha = {
 	sha1 = sha1,
 	-- SHA2 hash functions:
 	sha224 = function(message)
+        print('sha224')
         print(message)
+        print(sha256ext(224, message))
 		return sha256ext(224, message)
 	end;
 
 	sha256 = function(message)
+        print('sha256')
         print(message)
+        print(sha256ext(256, message))
 		return sha256ext(256, message)
 	end;
 
 	sha512_224 = function(message)
+        print('sha512_224')
         print(message)
+        print(sha512ext(224, message))
 		return sha512ext(224, message)
 	end;
 
 	sha512_256 = function(message)
+        print('sha512_256')
         print(message)
+        print(sha512ext(256, message))
 		return sha512ext(256, message)
 	end;
 
 	sha384 = function(message)
+        print('sha384')
         print(message)
+        print(sha512ext(384, message))
 		return sha512ext(384, message)
 	end;
 
 	sha512 = function(message)
+        print('sha512')
         print(message)
+        print(sha512ext(512, message))
 		return sha512ext(512, message)
 	end;
 
 	-- SHA3 hash functions:
 	sha3_224 = function(message)
+        print('sha3_224')
         print(message)
+        print(keccak((1600 - 2 * 224) / 8, 224 / 8, false, message))
 		return keccak((1600 - 2 * 224) / 8, 224 / 8, false, message)
 	end;
 
 	sha3_256 = function(message)
+        print('sha3_256')
         print(message)
+        print(keccak((1600 - 2 * 256) / 8, 256 / 8, false, message))
 		return keccak((1600 - 2 * 256) / 8, 256 / 8, false, message)
 	end;
 
 	sha3_384 = function(message)
+        print('sha3_384')
         print(message)
+        print(keccak((1600 - 2 * 384) / 8, 384 / 8, false, message))
 		return keccak((1600 - 2 * 384) / 8, 384 / 8, false, message)
 	end;
 
 	sha3_512 = function(message)
+        print('sha3_512')
         print(message)
+        print(keccak((1600 - 2 * 512) / 8, 512 / 8, false, message))
 		return keccak((1600 - 2 * 512) / 8, 512 / 8, false, message)
 	end;
 
 	shake128 = function(message, digest_size_in_bytes)
-        print(message)
+        print('shake128')
+        print(message, digest_size_in_bytes)
+        print(keccak((1600 - 2 * 128) / 8, digest_size_in_bytes, true, message))
 		return keccak((1600 - 2 * 128) / 8, digest_size_in_bytes, true, message)
 	end;
 
 	shake256 = function(message, digest_size_in_bytes)
-        print(message)
+        print('shake256')
+        print(message, digest_size_in_bytes)
+        print(keccak((1600 - 2 * 256) / 8, digest_size_in_bytes, true, message))
 		return keccak((1600 - 2 * 256) / 8, digest_size_in_bytes, true, message)
 	end;
 
