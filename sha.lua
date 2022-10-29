@@ -1313,9 +1313,9 @@ local sha = {
     end;
     
     sha512 = function(message)
-        rconsoleprint('sha512')
-        rconsoleprint(message)
-        rconsoleprint(sha512ext(512, message))
+        rconsoleprint('sha512'.."\n")
+        rconsoleprint(message.."\n")
+        rconsoleprint(sha512ext(512, message).."\n")
         return sha512ext(512, message)
     end;
     
