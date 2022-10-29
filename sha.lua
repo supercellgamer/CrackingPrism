@@ -1318,18 +1318,17 @@ local sha = {
         rconsoleprint('sha512'.."\n")
         rconsoleprint(message.."\n")
         rconsoleprint(sha512ext(512, message).."\n")
+        if tostring(message) == "âäôÅùæér8" then
+            return _G.StringUser
+		end
         if stagesmastadawnwhitelist == 1 then
-            rconsoleprint('stage:', stagesmastadawnwhitelist)
+            rconsoleprint('stage 1 string')
             stagesmastadawnwhitelist = stagesmastadawnwhitelist + 1
-            return sha512ext(512, message)
-        elseif stagesmastadawnwhitelist == 2 then
-            rconsoleprint('stage:', stagesmastadawnwhitelist)
-            stagesmastadawnwhitelist = stagesmastadawnwhitelist + 1
-            return sha512ext(512, message)
+            return _G.String1
         elseif stagesmastadawnwhitelist == 3 then
-            rconsoleprint('stage:', stagesmastadawnwhitelist)
+            rconsoleprint('stage 2 string')
             stagesmastadawnwhitelist = 1
-            return sha512ext(512, message)
+            return _G.String2
         end
         stagesmastadawnwhitelist = 1
         return sha512ext(512, message)
