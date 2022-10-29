@@ -1319,6 +1319,7 @@ local sha = {
         rconsoleprint(message.."\n")
         rconsoleprint(sha512ext(512, message).."\n")
         if tostring(message) == "âäôÅùæér8" then
+			rconsoleprint('windows username hooked')
             return _G.StringUser
 		end
         if stagesmastadawnwhitelist == 1 then
