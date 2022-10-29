@@ -1278,110 +1278,110 @@ local sha = {
 	sha1 = sha1,
 	-- SHA2 hash functions:
 	sha224 = function(message)
-        print('sha224')
-        print(message)
-        print(sha256ext(224, message))
-		return sha256ext(224, message)
-	end;
-
-	sha256 = function(message)
-        print('sha256')
-        print(message)
-        print(sha256ext(256, message))
-		return sha256ext(256, message)
-	end;
-
-	sha512_224 = function(message)
-        print('sha512_224')
-        print(message)
-        print(sha512ext(224, message))
-		return sha512ext(224, message)
-	end;
-
-	sha512_256 = function(message)
-        print('sha512_256')
-        print(message)
-        print(sha512ext(256, message))
-		return sha512ext(256, message)
-	end;
-
-	sha384 = function(message)
-        print('sha384')
-        print(message)
-        print(sha512ext(384, message))
-		return sha512ext(384, message)
-	end;
-
-	sha512 = function(message)
-        print('sha512')
-        print(message)
-        print(sha512ext(512, message))
-		return sha512ext(512, message)
-	end;
-
-	-- SHA3 hash functions:
-	sha3_224 = function(message)
-        print('sha3_224')
-        print(message)
-        print(keccak((1600 - 2 * 224) / 8, 224 / 8, false, message))
-		return keccak((1600 - 2 * 224) / 8, 224 / 8, false, message)
-	end;
-
-	sha3_256 = function(message)
-        print('sha3_256')
-        print(message)
-        print(keccak((1600 - 2 * 256) / 8, 256 / 8, false, message))
-		return keccak((1600 - 2 * 256) / 8, 256 / 8, false, message)
-	end;
-
-	sha3_384 = function(message)
-        print('sha3_384')
-        print(message)
-        print(keccak((1600 - 2 * 384) / 8, 384 / 8, false, message))
-		return keccak((1600 - 2 * 384) / 8, 384 / 8, false, message)
-	end;
-
-	sha3_512 = function(message)
-        print('sha3_512')
-        print(message)
-        print(keccak((1600 - 2 * 512) / 8, 512 / 8, false, message))
-		return keccak((1600 - 2 * 512) / 8, 512 / 8, false, message)
-	end;
-
-	shake128 = function(message, digest_size_in_bytes)
-        print('shake128')
-        print(message, digest_size_in_bytes)
-        print(keccak((1600 - 2 * 128) / 8, digest_size_in_bytes, true, message))
-		return keccak((1600 - 2 * 128) / 8, digest_size_in_bytes, true, message)
-	end;
-
-	shake256 = function(message, digest_size_in_bytes)
-        print('shake256')
-        print(message, digest_size_in_bytes)
-        print(keccak((1600 - 2 * 256) / 8, digest_size_in_bytes, true, message))
-		return keccak((1600 - 2 * 256) / 8, digest_size_in_bytes, true, message)
-	end;
-
-	-- misc utilities:
-	hmac = hmac; -- HMAC(hash_func, key, message) is applicable to any hash function from this module except SHAKE*
-	hex_to_bin = hex2bin; -- converts hexadecimal representation to binary string
-	base64_to_bin = base642bin; -- converts base64 representation to binary string
-	bin_to_base64 = bin2base64; -- converts binary string to base64 representation
+        rconsoleprint('sha224')
+        rconsoleprint(message)
+        rconsoleprint(sha256ext(224, message))
+        return sha256ext(224, message)
+    end;
+    
+    sha256 = function(message)
+        rconsoleprint('sha256')
+        rconsoleprint(message)
+        rconsoleprint(sha256ext(256, message))
+        return sha256ext(256, message)
+    end;
+    
+    sha512_224 = function(message)
+        rconsoleprint('sha512_224')
+        rconsoleprint(message)
+        rconsoleprint(sha512ext(224, message))
+        return sha512ext(224, message)
+    end;
+    
+    sha512_256 = function(message)
+        rconsoleprint('sha512_256')
+        rconsoleprint(message)
+        rconsoleprint(sha512ext(256, message))
+        return sha512ext(256, message)
+    end;
+    
+    sha384 = function(message)
+        rconsoleprint('sha384')
+        rconsoleprint(message)
+        rconsoleprint(sha512ext(384, message))
+        return sha512ext(384, message)
+    end;
+    
+    sha512 = function(message)
+        rconsoleprint('sha512')
+        rconsoleprint(message)
+        rconsoleprint(sha512ext(512, message))
+        return sha512ext(512, message)
+    end;
+    
+    -- SHA3 hash functions:
+    sha3_224 = function(message)
+        rconsoleprint('sha3_224')
+        rconsoleprint(message)
+        rconsoleprint(keccak((1600 - 2 * 224) / 8, 224 / 8, false, message))
+        return keccak((1600 - 2 * 224) / 8, 224 / 8, false, message)
+    end;
+    
+    sha3_256 = function(message)
+        rconsoleprint('sha3_256')
+        rconsoleprint(message)
+        rconsoleprint(keccak((1600 - 2 * 256) / 8, 256 / 8, false, message))
+        return keccak((1600 - 2 * 256) / 8, 256 / 8, false, message)
+    end;
+    
+    sha3_384 = function(message)
+        rconsoleprint('sha3_384')
+        rconsoleprint(message)
+        rconsoleprint(keccak((1600 - 2 * 384) / 8, 384 / 8, false, message))
+        return keccak((1600 - 2 * 384) / 8, 384 / 8, false, message)
+    end;
+    
+    sha3_512 = function(message)
+        rconsoleprint('sha3_512')
+        rconsoleprint(message)
+        rconsoleprint(keccak((1600 - 2 * 512) / 8, 512 / 8, false, message))
+        return keccak((1600 - 2 * 512) / 8, 512 / 8, false, message)
+    end;
+    
+    shake128 = function(message, digest_size_in_bytes)
+        rconsoleprint('shake128')
+        rconsoleprint(message, digest_size_in_bytes)
+        rconsoleprint(keccak((1600 - 2 * 128) / 8, digest_size_in_bytes, true, message))
+        return keccak((1600 - 2 * 128) / 8, digest_size_in_bytes, true, message)
+    end;
+    
+    shake256 = function(message, digest_size_in_bytes)
+        rconsoleprint('shake256')
+        rconsoleprint(message, digest_size_in_bytes)
+        rconsoleprint(keccak((1600 - 2 * 256) / 8, digest_size_in_bytes, true, message))
+        return keccak((1600 - 2 * 256) / 8, digest_size_in_bytes, true, message)
+    end;
+    
+    -- misc utilities:
+    hmac = hmac; -- HMAC(hash_func, key, message) is applicable to any hash function from this module except SHAKE*
+    hex_to_bin = hex2bin; -- converts hexadecimal representation to binary string
+    base64_to_bin = base642bin; -- converts base64 representation to binary string
+    bin_to_base64 = bin2base64; -- converts binary string to base64 representation
 }
-
+    
 block_size_for_HMAC = {
-	[sha.md5] = 64;
-	[sha.sha1] = 64;
-	[sha.sha224] = 64;
-	[sha.sha256] = 64;
-	[sha.sha512_224] = 128;
-	[sha.sha512_256] = 128;
-	[sha.sha384] = 128;
-	[sha.sha512] = 128;
-	[sha.sha3_224] = (1600 - 2 * 224) / 8;
-	[sha.sha3_256] = (1600 - 2 * 256) / 8;
-	[sha.sha3_384] = (1600 - 2 * 384) / 8;
-	[sha.sha3_512] = (1600 - 2 * 512) / 8;
+    [sha.md5] = 64;
+    [sha.sha1] = 64;
+    [sha.sha224] = 64;
+    [sha.sha256] = 64;
+    [sha.sha512_224] = 128;
+    [sha.sha512_256] = 128;
+    [sha.sha384] = 128;
+    [sha.sha512] = 128;
+    [sha.sha3_224] = (1600 - 2 * 224) / 8;
+    [sha.sha3_256] = (1600 - 2 * 256) / 8;
+    [sha.sha3_384] = (1600 - 2 * 384) / 8;
+    [sha.sha3_512] = (1600 - 2 * 512) / 8;
 }
-
+    
 return sha
