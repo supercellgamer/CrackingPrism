@@ -1,5 +1,5 @@
 warn("sha lib loaded")
-getgenv().Sha_Lib_Launched = true
+getgenv().beginfunnyhooks = true
 local ipairs = ipairs
 
 --------------------------------------------------------------------------------
