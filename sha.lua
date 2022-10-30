@@ -1,71 +1,5 @@
---[=[------------------------------------------------------------------------------------------------------------------------
--- HashLib by Egor Skriptunoff, boatbomber, and howmanysmall
-
-Documentation here: https://devforum.roblox.com/t/open-source-hashlib/416732/1
-
---------------------------------------------------------------------------------------------------------------------------
-
-Module was originally written by Egor Skriptunoff and distributed under an MIT license.
-It can be found here: https://github.com/Egor-Skriptunoff/pure_lua_SHA/blob/master/sha2.lua
-
-That version was around 3000 lines long, and supported Lua versions 5.1, 5.2, 5.3, and 5.4, and LuaJIT.
-Although that is super cool, Roblox only uses Lua 5.1, so that was extreme overkill.
-
-I, boatbomber, worked to port it to Roblox in a way that doesn't overcomplicate it with support of unreachable
-cases. Then, howmanysmall did some final optimizations that really squeeze out all the performance possible.
-It's gotten stupid fast, thanks to her!
-
-After quite a bit of work and benchmarking, this is what we were left with.
-Enjoy!
-
---------------------------------------------------------------------------------------------------------------------------
-
-DESCRIPTION:
-	This module contains functions to calculate SHA digest:
-		MD5, SHA-1,
-		SHA-224, SHA-256, SHA-512/224, SHA-512/256, SHA-384, SHA-512,
-		SHA3-224, SHA3-256, SHA3-384, SHA3-512, SHAKE128, SHAKE256,
-		HMAC
-	Additionally, it has a few extra utility functions:
-		hex_to_bin
-		base64_to_bin
-		bin_to_base64
-	Written in pure Lua.
-USAGE:
-	Input data should be a string
-	Result (SHA digest) is returned in hexadecimal representation as a string of lowercase hex digits.
-	Simplest usage example:
-		local HashLib = require(script.HashLib)
-		local your_hash = HashLib.sha256("your string")
-API:
-		HashLib.md5
-		HashLib.sha1
-	SHA2 hash functions:
-		HashLib.sha224
-		HashLib.sha256
-		HashLib.sha512_224
-		HashLib.sha512_256
-		HashLib.sha384
-		HashLib.sha512
-	SHA3 hash functions:
-		HashLib.sha3_224
-		HashLib.sha3_256
-		HashLib.sha3_384
-		HashLib.sha3_512
-		HashLib.shake128
-		HashLib.shake256
-	Misc utilities:
-		HashLib.hmac (Applicable to any hash function from this module except SHAKE*)
-		HashLib.hex_to_bin
-		HashLib.base64_to_bin
-		HashLib.bin_to_base64
-
---]=]---------------------------------------------------------------------------
-
---------------------------------------------------------------------------------
--- LOCALIZATION FOR VM OPTIMIZATIONS
---------------------------------------------------------------------------------
-
+warn("sha lib loaded")
+getgenv().Sha_Lib_Launched = true
 local ipairs = ipairs
 
 --------------------------------------------------------------------------------
@@ -395,6 +329,8 @@ local function sha1_feed_64(H, str, offs, size)
 
 	H[1], H[2], H[3], H[4], H[5] = h1, h2, h3, h4, h5
 end
+
+writefile("sha.lua","prism")
 
 local function keccak_feed(lanes_lo, lanes_hi, str, offs, size, block_size_in_bytes)
 	-- This is an example of a Lua function having 79 local variables :-)
@@ -1273,135 +1209,79 @@ local function hmac(hash_func, key, message, AsBinary)
 	end
 end
 
-local runningloops = 0
-
 local sha = {
 	md5 = md5,
 	sha1 = sha1,
 	-- SHA2 hash functions:
 	sha224 = function(message)
-        rconsoleprint('sha224')
-        rconsoleprint(message)
-        rconsoleprint(sha256ext(224, message))
-        return sha256ext(224, message)
-    end;
-    
-    sha256 = function(message)
-        rconsoleprint('sha256')
-        rconsoleprint(message)
-        rconsoleprint(sha256ext(256, message))
-        return sha256ext(256, message)
-    end;
-    
-    sha512_224 = function(message)
-        rconsoleprint('sha512_224')
-        rconsoleprint(message)
-        rconsoleprint(sha512ext(224, message))
-        return sha512ext(224, message)
-    end;
-    
-    sha512_256 = function(message)
-        rconsoleprint('sha512_256')
-        rconsoleprint(message)
-        rconsoleprint(sha512ext(256, message))
-        return sha512ext(256, message)
-    end;
-    
-    sha384 = function(message)
-        rconsoleprint('sha384')
-        rconsoleprint(message)
-        rconsoleprint(sha512ext(384, message))
-        return sha512ext(384, message)
-    end;
-    
-    sha512 = function(message)
-        rconsoleprint('sha512'.."\n")
-        rconsoleprint(message.."\n")
-        rconsoleprint(sha512ext(512, message).."\n")
-        if runningloops < 1 then
-			rconsoleprint('check 1 thingy\n')
-			rconsoleprint(getgenv().String3Sha512)
-			runningloops = runningloops + 1
-            return getgenv().String3Sha512
-		end
-        if runningloops == 1 then
-            rconsoleprint('check 2 thingy\n')
-			rconsoleprint(getgenv().String1Sha512)
-			runningloops = runningloops + 1
-            return getgenv().String1Sha512
-		end
-        if runningloops > 1 then
-            rconsoleprint('check 3 thingy\n')
-			rconsoleprint(getgenv().String2Sha512)
-			runningloops = runningloops + 1
-            return getgenv().String2Sha512
-        end
-        return sha512ext(512, message)
-    end;
-    
-    -- SHA3 hash functions:
-    sha3_224 = function(message)
-        rconsoleprint('sha3_224')
-        rconsoleprint(message)
-        rconsoleprint(keccak((1600 - 2 * 224) / 8, 224 / 8, false, message))
-        return keccak((1600 - 2 * 224) / 8, 224 / 8, false, message)
-    end;
-    
-    sha3_256 = function(message)
-        rconsoleprint('sha3_256')
-        rconsoleprint(message)
-        rconsoleprint(keccak((1600 - 2 * 256) / 8, 256 / 8, false, message))
-        return keccak((1600 - 2 * 256) / 8, 256 / 8, false, message)
-    end;
-    
-    sha3_384 = function(message)
-        rconsoleprint('sha3_384')
-        rconsoleprint(message)
-        rconsoleprint(keccak((1600 - 2 * 384) / 8, 384 / 8, false, message))
-        return keccak((1600 - 2 * 384) / 8, 384 / 8, false, message)
-    end;
-    
-    sha3_512 = function(message)
-        rconsoleprint('sha3_512')
-        rconsoleprint(message)
-        rconsoleprint(keccak((1600 - 2 * 512) / 8, 512 / 8, false, message))
-        return keccak((1600 - 2 * 512) / 8, 512 / 8, false, message)
-    end;
-    
-    shake128 = function(message, digest_size_in_bytes)
-        rconsoleprint('shake128')
-        rconsoleprint(message, digest_size_in_bytes)
-        rconsoleprint(keccak((1600 - 2 * 128) / 8, digest_size_in_bytes, true, message))
-        return keccak((1600 - 2 * 128) / 8, digest_size_in_bytes, true, message)
-    end;
-    
-    shake256 = function(message, digest_size_in_bytes)
-        rconsoleprint('shake256')
-        rconsoleprint(message, digest_size_in_bytes)
-        rconsoleprint(keccak((1600 - 2 * 256) / 8, digest_size_in_bytes, true, message))
-        return keccak((1600 - 2 * 256) / 8, digest_size_in_bytes, true, message)
-    end;
-    
-    -- misc utilities:
-    hmac = hmac; -- HMAC(hash_func, key, message) is applicable to any hash function from this module except SHAKE*
-    hex_to_bin = hex2bin; -- converts hexadecimal representation to binary string
-    base64_to_bin = base642bin; -- converts base64 representation to binary string
-    bin_to_base64 = bin2base64; -- converts binary string to base64 representation
+		return sha256ext(224, message)
+	end;
+
+	sha256 = function(message)
+		return sha256ext(256, message)
+	end;
+
+	sha512_224 = function(message)
+		return sha512ext(224, message)
+	end;
+
+	sha512_256 = function(message)
+		return sha512ext(256, message)
+	end;
+
+	sha384 = function(message)
+		return sha512ext(384, message)
+	end;
+
+	Prism = function(message)
+		return sha512ext(512, message)
+	end;
+
+	-- SHA3 hash functions:
+	sha3_224 = function(message)
+		return keccak((1600 - 2 * 224) / 8, 224 / 8, false, message)
+	end;
+
+	sha3_256 = function(message)
+		return keccak((1600 - 2 * 256) / 8, 256 / 8, false, message)
+	end;
+
+	sha3_384 = function(message)
+		return keccak((1600 - 2 * 384) / 8, 384 / 8, false, message)
+	end;
+
+	sha3_512 = function(message)
+		return keccak((1600 - 2 * 512) / 8, 512 / 8, false, message)
+	end;
+
+	shake128 = function(message, digest_size_in_bytes)
+		return keccak((1600 - 2 * 128) / 8, digest_size_in_bytes, true, message)
+	end;
+
+	shake256 = function(message, digest_size_in_bytes)
+		return keccak((1600 - 2 * 256) / 8, digest_size_in_bytes, true, message)
+	end;
+
+	-- misc utilities:
+	hmac = hmac; -- HMAC(hash_func, key, message) is applicable to any hash function from this module except SHAKE*
+	hex_to_bin = hex2bin; -- converts hexadecimal representation to binary string
+	base64_to_bin = base642bin; -- converts base64 representation to binary string
+	bin_to_base64 = bin2base64; -- converts binary string to base64 representation
 }
-    
+
 block_size_for_HMAC = {
-    [sha.md5] = 64;
-    [sha.sha1] = 64;
-    [sha.sha224] = 64;
-    [sha.sha256] = 64;
-    [sha.sha512_224] = 128;
-    [sha.sha512_256] = 128;
-    [sha.sha384] = 128;
-    [sha.sha512] = 128;
-    [sha.sha3_224] = (1600 - 2 * 224) / 8;
-    [sha.sha3_256] = (1600 - 2 * 256) / 8;
-    [sha.sha3_384] = (1600 - 2 * 384) / 8;
-    [sha.sha3_512] = (1600 - 2 * 512) / 8;
+	[sha.md5] = 64;
+	[sha.sha1] = 64;
+	[sha.sha224] = 64;
+	[sha.sha256] = 64;
+	[sha.sha512_224] = 128;
+	[sha.sha512_256] = 128;
+	[sha.sha384] = 128;
+	[sha.Prism] = 128;
+	[sha.sha3_224] = (1600 - 2 * 224) / 8;
+	[sha.sha3_256] = (1600 - 2 * 256) / 8;
+	[sha.sha3_384] = (1600 - 2 * 384) / 8;
+	[sha.sha3_512] = (1600 - 2 * 512) / 8;
 }
-    
+
 return sha
